@@ -29,8 +29,8 @@ sudo apt install python3 python3-evdev
 Ensuite, télécharge le projet :
 
 ```bash
-git clone https://github.com/TON-PSEUDO/linux-cps-clicker.git
-cd linux-cps-clicker
+git clone https://github.com/WALIDXD-exe/Linux-Auto-Clicker.git
+cd Linux-Auto-Clicker/linux-cps-clicker
 ```
 
 Sans Git, tu peux aussi cliquer sur le bouton vert **Code** puis **Download ZIP** sur la page GitHub, et décompresser le dossier.
