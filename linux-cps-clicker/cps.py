@@ -1,12 +1,5 @@
 #!/usr/bin/env python3
-"""Auto-clicker CPS pour Linux (Wayland + X11) via evdev/uinput.
-F4 : armer / désarmer
-Armé : tant que tu maintiens le clic gauche, le script envoie des clics répétés.
-F8 : quitter
-Usage : sudo python3 cps.py [--cps 12] [--debug]
-Note : la souris est capturée et recopiée via une souris virtuelle.
-       Les pavés tactiles ne sont pas pris en charge (souris uniquement).
-"""
+
 import argparse
 import selectors
 import sys
@@ -95,7 +88,6 @@ def main():
     if not mice:
         sys.exit("Aucune souris détectée (essaie avec sudo).")
 
-    # Tout est rangé par chemin (string), pas par objet InputDevice
     mice_by_path = {m.path: m for m in mice}
     mouse_ui = {}
     forwarded = {}
@@ -106,8 +98,10 @@ def main():
             m.grab()
     except OSError as err:
         sys.exit(f"Impossible de capturer la souris : {err}")
-
-    print("Vepe - v1.0 (Linux)")
+    
+    print("AutoLinux - v1.0 (Linux)")
+    print("par Walid22202")
+    print("Discord: lecouscoussier42")
     print("Toggle: F4   Maintiens le clic gauche pour cliquer   Quitter: F8")
     print(f"CPS cible : {args.cps:.1f}")
     print("Claviers écoutés :")
@@ -122,7 +116,7 @@ def main():
     for dev in keyboards + mice:
         sel.register(dev, selectors.EVENT_READ, data=dev.path)
 
-    time.sleep(0.5)  # laisse le système reconnaître les souris virtuelles
+    time.sleep(0.5)  
     threading.Thread(target=click_loop, args=(args.cps,), daemon=True).start()
 
     last_t = time.perf_counter()
@@ -144,7 +138,7 @@ def main():
                                 elif ev.value == 0:
                                     held = False
                                 if not forwarded[path]:
-                                    continue  # appui gardé pour le script
+                                    continue  
                                 if ev.value == 0:
                                     forwarded[path] = False
                             with lock:
